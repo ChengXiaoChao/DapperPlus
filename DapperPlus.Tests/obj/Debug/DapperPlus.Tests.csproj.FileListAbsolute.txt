@@ -17,7 +17,6 @@ F:\Github\DapperPlus\DapperPlus.Tests\bin\Debug\Dapper.dll
 F:\Github\DapperPlus\DapperPlus.Tests\bin\Debug\DapperPlus.pdb
 F:\Github\DapperPlus\DapperPlus.Tests\bin\Debug\DapperPlus.xml
 F:\Github\DapperPlus\DapperPlus.Tests\bin\Debug\Dapper.xml
-F:\Github\DapperPlus\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.csprojResolveAssemblyReference.cache
 F:\Github\DapperPlus\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.dll
 F:\Github\DapperPlus\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.pdb
 E:\CCGithub\DapperPlus.git\trunk\DapperPlus.Tests\bin\Debug\DapperPlus.Tests.dll
@@ -31,3 +30,9 @@ E:\CCGithub\DapperPlus.git\trunk\DapperPlus.Tests\bin\Debug\Dapper.xml
 E:\CCGithub\DapperPlus.git\trunk\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.csprojResolveAssemblyReference.cache
 E:\CCGithub\DapperPlus.git\trunk\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.dll
 E:\CCGithub\DapperPlus.git\trunk\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.pdb
+F:\Github\DapperPlus\DapperPlus.Tests\bin\Debug\zh-Hans\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+F:\Github\DapperPlus\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.csprojAssemblyReference.cache
+F:\Github\DapperPlus\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.csproj.CoreCompileInputs.cache
+F:\Github\DapperPlus\DapperPlus.Tests\obj\Debug\DapperPlus.Tests.csproj.CopyComplete
+F:\Github\DapperPlus\DapperPlus.Tests\bin\Debug\DapperPlus.Tests.dll.config
+F:\Github\DapperPlus\DapperPlus.Tests\bin\Debug\MySql.Data.dll

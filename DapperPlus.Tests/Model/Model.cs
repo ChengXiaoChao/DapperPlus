@@ -6,6 +6,46 @@ using System.Text;
 
 namespace DapperPlus.Tests.Model
 {
+    public class OrderHead
+    {
+        [Key]
+        public string ID { get; set; }
+        public DateTime BusinessDate { get; set; }
+        public string CurrentEmployID { get; set; }
+        public string CheckID { get; set; }
+        public string CheckNumber { get; set; }
+        public string TermId { get; set; }
+        public string TableId { get; set; }
+        public string IPAddress { get; set; }
+        public string PaymentType { get; set; }
+        public string RequestType { get; set; }
+        public string ErrorMsg { get; set; }
+        public string PayCode { get; set; }
+        public string StoreName { get; set; }
+        public string StoreCode { get; set; }
+        public string SubmitAmount { get; set; }
+        public string DiscountAmount { get; set; }
+        public string PaymentAmount { get; set; }
+        public DateTime PosSumbitTime { get; set; }
+        public DateTime ServerReceivePosTime { get; set; }
+        public DateTime ServerSumbitePaymentTime { get; set; }
+        public DateTime ServerReceivePaymentResult { get; set; }
+        public DateTime ServerSumbitePaymentResultToPos { get; set; }
+        public DateTime PosReceiveTime { get; set; }
+        public DateTime CloseCheckTime { get; set; }
+        public string Statue { get; set; }
+        public string CreateBy { get; set; }
+        public string CreateDate { get; set; }
+        public string TradeNo { get; set; }
+        public string Ext1 { get; set; }
+        public string Ext2 { get; set; }
+        public string Ext3 { get; set; }
+        public string Ext4 { get; set; }
+        public string Ext5 { get; set; }
+        public string Ext6 { get; set; }
+        public string Ext7 { get; set; }
+        public string Ext8 { get; set; }
+    }
     public class test
     {
         [Identity]

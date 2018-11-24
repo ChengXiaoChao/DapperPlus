@@ -24,6 +24,352 @@
             表名标识
             </summary>
         </member>
+        <member name="T:DapperPlus.Controllers.DBBaseController">
+            <summary>
+            数据库操作工厂
+            </summary>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.Add``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction)">
+            <summary>
+            添加一个实体
+            </summary>
+            <returns>受影响行数</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.AddList``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+            <summary>
+            添加多个实体
+            </summary>
+            <returns>受影响行数</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.Delete``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction)">
+            <summary>
+            删除数据
+            </summary>
+            <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <param name="trans"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.Delete``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction)">
+            <summary>
+            删除一个实体 必须对实体标记主键[Key]或自增标识[Identity]
+            </summary>
+            <returns>受影响行数</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.DeleteList``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+            <summary>
+            删除多个实体 必须对实体标记主键[Key]或自增标识[Identity]
+            </summary>
+            <returns>受影响行数</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.Update``1(System.Data.IDbConnection,``0,System.Data.IDbTransaction)">
+            <summary>
+            更新一个实体 必须对实体标记主键[Key]或自增标识[Identity]
+            </summary>
+            <returns>受影响行数</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.UpdateList``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+            <summary>
+            更新多个实体 必须对实体标记主键[Key]或自增标识[Identity]
+            </summary>
+            <returns>受影响行数</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetModel``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction)">
+            <summary>
+            获取一个实体 
+            </summary>
+            <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <returns>T</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetList``1(System.Data.IDbConnection,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取实体集合
+            </summary>
+            <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime </param>
+            <param name="isAsc">升序/降序 默认升序 eg: true </param>
+            <param name="top">top 条数</param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetSqlList``1(System.Data.IDbConnection,System.String,System.String,System.String,System.Object,System.String,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取数据 支持联表查询
+            </summary>
+            <param name="fields">要查询的字段 联表eg: A.Field1,B.Field2,...</param>
+            <param name="tableName">表名 联表eg: TableA INNER JOIN TableB ON TableA.Id=TableB.Id</param>
+            <param name="whereParamName">where条件 可以参数化 联表eg: TableA.Field1=@Field1 AND TableB.Field2=@Field2</param>
+            <param name="whereParamValue">where条件中参数化的值 联表eg: new { Field1=Value1,Field2=Value2 }</param>
+            <param name="sort">排序 联表eg: A.Field1 DESC,B.Field2,...</param>
+            <param name="top">top 条数</param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
+            <summary>
+            分页获取实体集合
+            </summary>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime </param>
+            <param name="isAsc">升序/降序 默认升序 eg: true </param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetSqlPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+            分页获取数据 支持联表分页查询
+            </summary>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="fields">要查询的字段 联表eg: A.Field1,B.Field2,... </param>
+            <param name="tableName">表名 联表eg: TableA INNER JOIN TableB ON TableA.Id=TableB.Id</param>
+            <param name="whereParamName">where条件 可以参数化 联表eg: TableA.Field1=@Field1 AND TableB.Field2=@Field2</param>
+            <param name="whereParamValue">where条件中参数化的值 联表eg: new { Field1=Value1,Field2=Value2 }</param>
+            <param name="sort">排序 联表eg: A.Field1 DESC,B.Field2,...</param>
+            <returns>IEnumerable dynamic </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetDataTable(System.Data.IDbConnection,System.String,System.Object)">
+            <summary>
+            根据SQL查询数据
+            </summary>
+            <returns>DataTable</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.InsertBulk``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+            <summary>
+            批量插入 
+            </summary>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.ToDataTable``1(System.Collections.Generic.IEnumerable{``0},System.Data.DataTable)">
+            <summary>
+            将List转为DataTable
+            </summary>
+            <param name="dt">dt不为空时用dt的表结构，否者将反射T作为表结构</param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.IsKey(System.Reflection.PropertyInfo)">
+            <summary>
+            是否唯一键
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.IsIdentity(System.Reflection.PropertyInfo)">
+            <summary>
+            是否自增列
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.IsExtraElement(System.Reflection.PropertyInfo)">
+            <summary>
+            是否额外元素 如果标记则不对该属性进行数据库操作
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetExpresssKey(System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            获取lambda表达式的值 仅用于排序
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetTableName(System.Type)">
+            <summary>
+            获取表名 如果类有TableAttribute特性，采用特性说明的类名，否则用类名作为表名
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.IsDateTimeAndNull``1(System.Reflection.PropertyInfo,``0)">
+            <summary>
+            判断是否为空日期类型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="item"></param>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.IsNullableType(System.Reflection.PropertyInfo)">
+            <summary>
+            判断是否是可空类型
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetNullableType(System.Reflection.PropertyInfo)">
+            <summary>
+            获取可空类型的基类型
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.IsIEnumerable``1(``0)">
+            <summary>
+            判断是否是IEnumerable类型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="t"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DapperPlus.Controllers.DBFactory">
+            <summary>
+            实例数据库操作管理类
+            </summary>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBFactory.Create(System.Data.IDbConnection)">
+            <summary>
+            创建实例
+            </summary>
+            <param name="conn"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DapperPlus.Controllers.MySQLController">
+            <summary>
+            MySql操作
+            </summary>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetDataTable(System.Data.IDbConnection,System.String,System.Object)">
+            <summary>
+            根据SQL查询数据
+            </summary>
+            <returns>DataTable</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetList``1(System.Data.IDbConnection,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取实体集合
+            </summary>
+            <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime </param>
+            <param name="isAsc">升序/降序 默认升序 eg: true </param>
+            <param name="top">top 条数</param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetModel``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction)">
+             <summary>
+            获取一个实体 
+             </summary>
+             <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+             <returns>T</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
+            <summary>
+            分页获取实体集合
+            </summary>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime </param>
+            <param name="isAsc">升序/降序 默认升序 eg: true </param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetSqlList``1(System.Data.IDbConnection,System.String,System.String,System.String,System.Object,System.String,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取数据 支持联表查询
+            </summary>
+            <param name="fields">要查询的字段 联表eg: A.Field1,B.Field2,...</param>
+            <param name="tableName">表名 联表eg: TableA INNER JOIN TableB ON TableA.Id=TableB.Id</param>
+            <param name="whereParamName">where条件 可以参数化 联表eg: TableA.Field1=@Field1 AND TableB.Field2=@Field2</param>
+            <param name="whereParamValue">where条件中参数化的值 联表eg: new { Field1=Value1,Field2=Value2 }</param>
+            <param name="sort">排序 联表eg: A.Field1 DESC,B.Field2,...</param>
+            <param name="top">top 条数</param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetSqlPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+            分页获取数据 支持联表分页查询
+            </summary>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="fields">要查询的字段 联表eg: A.Field1,B.Field2,... </param>
+            <param name="tableName">表名 联表eg: TableA INNER JOIN TableB ON TableA.Id=TableB.Id</param>
+            <param name="whereParamName">where条件 可以参数化 联表eg: TableA.Field1=@Field1 AND TableB.Field2=@Field2</param>
+            <param name="whereParamValue">where条件中参数化的值 联表eg: new { Field1=Value1,Field2=Value2 }</param>
+            <param name="sort">排序 联表eg: A.Field1 DESC,B.Field2,...</param>
+            <returns>IEnumerable dynamic </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.InsertBulk``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+            <summary>
+            MySql批量插入 暂不支持
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="listT"></param>
+            <param name="trans"></param>
+            <returns></returns>
+        </member>
+        <member name="T:DapperPlus.Controllers.SQLServerController">
+            <summary>
+            SQLServer操作
+            </summary>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetDataTable(System.Data.IDbConnection,System.String,System.Object)">
+            <summary>
+            根据SQL查询数据
+            </summary>
+            <returns>DataTable</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetList``1(System.Data.IDbConnection,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取实体集合
+            </summary>
+            <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime </param>
+            <param name="isAsc">升序/降序 默认升序 eg: true </param>
+            <param name="top">top 条数</param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetModel``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction)">
+             <summary>
+            获取一个实体 
+             </summary>
+             <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+             <returns>T</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
+            <summary>
+            分页获取实体集合
+            </summary>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime </param>
+            <param name="isAsc">升序/降序 默认升序 eg: true </param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetSqlList``1(System.Data.IDbConnection,System.String,System.String,System.String,System.Object,System.String,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取数据 支持联表查询
+            </summary>
+            <param name="fields">要查询的字段 联表eg: A.Field1,B.Field2,...</param>
+            <param name="tableName">表名 联表eg: TableA INNER JOIN TableB ON TableA.Id=TableB.Id</param>
+            <param name="whereParamName">where条件 可以参数化 联表eg: TableA.Field1=@Field1 AND TableB.Field2=@Field2</param>
+            <param name="whereParamValue">where条件中参数化的值 联表eg: new { Field1=Value1,Field2=Value2 }</param>
+            <param name="sort">排序 联表eg: A.Field1 DESC,B.Field2,...</param>
+            <param name="top">top 条数</param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetSqlPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.Object,System.String,System.Data.IDbTransaction)">
+            <summary>
+            分页获取数据 支持联表分页查询
+            </summary>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="fields">要查询的字段 联表eg: A.Field1,B.Field2,... </param>
+            <param name="tableName">表名 联表eg: TableA INNER JOIN TableB ON TableA.Id=TableB.Id</param>
+            <param name="whereParamName">where条件 可以参数化 联表eg: TableA.Field1=@Field1 AND TableB.Field2=@Field2</param>
+            <param name="whereParamValue">where条件中参数化的值 联表eg: new { Field1=Value1,Field2=Value2 }</param>
+            <param name="sort">排序 联表eg: A.Field1 DESC,B.Field2,...</param>
+            <returns>IEnumerable dynamic </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.InsertBulk``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
+            <summary>
+            批量插入 
+            </summary>
+        </member>
         <member name="T:Dapper.Extensions">
             <summary>
             扩展
@@ -35,7 +381,7 @@
             </summary>
             <returns>受影响行数</returns>
         </member>
-        <member name="M:Dapper.Extensions.Add``1(System.Data.IDbConnection,System.Collections.Generic.List{``0},System.Data.IDbTransaction)">
+        <member name="M:Dapper.Extensions.AddList``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
             <summary>
             添加多个实体
             </summary>
@@ -55,7 +401,7 @@
             </summary>
             <returns>受影响行数</returns>
         </member>
-        <member name="M:Dapper.Extensions.Delete``1(System.Data.IDbConnection,System.Collections.Generic.List{``0},System.Data.IDbTransaction)">
+        <member name="M:Dapper.Extensions.DeleteList``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
             <summary>
             删除多个实体 必须对实体标记主键[Key]或自增标识[Identity]
             </summary>
@@ -67,7 +413,7 @@
             </summary>
             <returns>受影响行数</returns>
         </member>
-        <member name="M:Dapper.Extensions.Update``1(System.Data.IDbConnection,System.Collections.Generic.List{``0},System.Data.IDbTransaction)">
+        <member name="M:Dapper.Extensions.UpdateList``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
             <summary>
             更新多个实体 必须对实体标记主键[Key]或自增标识[Identity]
             </summary>
@@ -128,22 +474,66 @@
             <param name="sort">排序 联表eg: A.Field1 DESC,B.Field2,...</param>
             <returns>IEnumerable dynamic </returns>
         </member>
-        <member name="M:Dapper.Extensions.GetDataTable(System.Data.IDbConnection,System.String)">
+        <member name="M:Dapper.Extensions.GetDataTable(System.Data.IDbConnection,System.String,System.Object)">
             <summary>
             根据SQL查询数据
             </summary>
             <returns>DataTable</returns>
         </member>
-        <member name="M:Dapper.Extensions.InsertBulk``1(System.Data.IDbConnection,System.Collections.Generic.List{``0},System.Data.IDbTransaction)">
+        <member name="M:Dapper.Extensions.InsertBulk``1(System.Data.IDbConnection,System.Collections.Generic.IEnumerable{``0},System.Data.IDbTransaction)">
             <summary>
             批量插入 
             </summary>
         </member>
-        <member name="M:Dapper.Extensions.ToDataTable``1(System.Collections.Generic.IList{``0},System.Data.DataTable)">
+        <member name="M:Dapper.Extensions.ToDataTable``1(System.Collections.Generic.IEnumerable{``0},System.Data.DataTable)">
             <summary>
             将List转为DataTable
             </summary>
             <param name="dt">dt不为空时用dt的表结构，否者将反射T作为表结构</param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.Extensions.IsKey(System.Reflection.PropertyInfo)">
+            <summary>
+            是否唯一键
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.Extensions.IsIdentity(System.Reflection.PropertyInfo)">
+            <summary>
+            是否自增列
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.Extensions.IsExtraElement(System.Reflection.PropertyInfo)">
+            <summary>
+            是否额外元素 如果标记则不对该属性进行数据库操作
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.Extensions.GetExpresssKey(System.Linq.Expressions.LambdaExpression)">
+            <summary>
+            获取lambda表达式的值 仅用于排序
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.Extensions.GetTableName(System.Type)">
+            <summary>
+            获取表名 如果类有TableAttribute特性，采用特性说明的类名，否则用类名作为表名
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Dapper.Extensions.IsDateTimeAndNull``1(System.Reflection.PropertyInfo,``0)">
+            <summary>
+            判断是否为空日期类型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="item"></param>
+            <param name="t"></param>
             <returns></returns>
         </member>
         <member name="M:Dapper.Extensions.IsNullableType(System.Reflection.PropertyInfo)">
