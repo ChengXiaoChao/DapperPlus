@@ -22,4 +22,3 @@ E:\CCGithub\DapperPlus.git\trunk\DapperPlus\obj\Debug\DapperPlus.dll
 E:\CCGithub\DapperPlus.git\trunk\DapperPlus\obj\Debug\DapperPlus.pdb
 F:\Github\DapperPlus\DapperPlus\obj\Debug\DapperPlus.csproj.CoreCompileInputs.cache
 F:\Github\DapperPlus\DapperPlus\obj\Debug\DapperPlus.csproj.CopyComplete
-F:\Github\DapperPlus\DapperPlus\obj\Debug\DapperPlus.csprojAssemblyReference.cache

@@ -80,6 +80,17 @@
             <param name="param">WHERE条件 eg: new { Name="张三" }</param>
             <returns>T</returns>
         </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetModel``1(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+            获取一个实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="whereParamName"></param>
+            <param name="whereParamValue"></param>
+            <param name="trans"></param>
+            <returns></returns>
+        </member>
         <member name="M:DapperPlus.Controllers.DBBaseController.GetList``1(System.Data.IDbConnection,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
             <summary>
             获取实体集合
@@ -89,6 +100,20 @@
             <param name="isAsc">升序/降序 默认升序 eg: true </param>
             <param name="top">top 条数</param>
             <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetList``1(System.Data.IDbConnection,System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="whereParamName"></param>
+            <param name="whereParamValue"></param>
+            <param name="funcSort"></param>
+            <param name="isAsc"></param>
+            <param name="top"></param>
+            <param name="trans"></param>
+            <returns></returns>
         </member>
         <member name="M:DapperPlus.Controllers.DBBaseController.GetSqlList``1(System.Data.IDbConnection,System.String,System.String,System.String,System.Object,System.String,System.Nullable{System.Int32},System.Data.IDbTransaction)">
             <summary>
@@ -113,6 +138,22 @@
             <param name="funcSort">排序 eg: d=>d.CreateTime </param>
             <param name="isAsc">升序/降序 默认升序 eg: true </param>
             <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.DBBaseController.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
+            <summary>
+            分页获取数据
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="pageNumber"></param>
+            <param name="pageSize"></param>
+            <param name="totalCounts"></param>
+            <param name="whereParamName"></param>
+            <param name="whereParamValue"></param>
+            <param name="funcSort"></param>
+            <param name="isAsc"></param>
+            <param name="trans"></param>
+            <returns></returns>
         </member>
         <member name="M:DapperPlus.Controllers.DBBaseController.GetSqlPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.Object,System.String,System.Data.IDbTransaction)">
             <summary>
@@ -244,12 +285,37 @@
             <param name="top">top 条数</param>
             <returns>IEnumerable T </returns>
         </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetList``1(System.Data.IDbConnection,System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="whereParamName">字符串WHERE条件</param>
+            <param name="whereParamValue">字符串WHERE条件中的参数值</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime</param>
+            <param name="isAsc">升序/降序 默认升序 eg: true </param>
+            <param name="top">top 条数</param>
+            <param name="trans"></param>
+            <returns></returns>
+        </member>
         <member name="M:DapperPlus.Controllers.MySQLController.GetModel``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction)">
              <summary>
             获取一个实体 
              </summary>
              <param name="param">WHERE条件 eg: new { Name="张三" }</param>
              <returns>T</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetModel``1(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+            获取一个实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="whereParamName">字符串WHERE条件</param>
+            <param name="whereParamValue">字符串WHERE条件中的参数值</param>
+            <param name="trans"></param>
+            <returns></returns>
         </member>
         <member name="M:DapperPlus.Controllers.MySQLController.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
             <summary>
@@ -262,6 +328,22 @@
             <param name="funcSort">排序 eg: d=>d.CreateTime </param>
             <param name="isAsc">升序/降序 默认升序 eg: true </param>
             <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.MySQLController.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
+            <summary>
+            分页获取实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="whereParamName">字符串WHERE条件</param>
+            <param name="whereParamValue">字符串WHERE条件中的参数值</param>
+            <param name="funcSort"></param>
+            <param name="isAsc"></param>
+            <param name="trans"></param>
+            <returns></returns>
         </member>
         <member name="M:DapperPlus.Controllers.MySQLController.GetSqlList``1(System.Data.IDbConnection,System.String,System.String,System.String,System.Object,System.String,System.Nullable{System.Int32},System.Data.IDbTransaction)">
             <summary>
@@ -320,12 +402,37 @@
             <param name="top">top 条数</param>
             <returns>IEnumerable T </returns>
         </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetList``1(System.Data.IDbConnection,System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="whereParamName">where条件</param>
+            <param name="whereParamValue">where条件中参数化的值</param>
+            <param name="funcSort"></param>
+            <param name="isAsc"></param>
+            <param name="top"></param>
+            <param name="trans"></param>
+            <returns></returns>
+        </member>
         <member name="M:DapperPlus.Controllers.SQLServerController.GetModel``1(System.Data.IDbConnection,System.Object,System.Data.IDbTransaction)">
              <summary>
             获取一个实体 
              </summary>
              <param name="param">WHERE条件 eg: new { Name="张三" }</param>
              <returns>T</returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetModel``1(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+            获取一个实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="whereParamName">字符串WHERE条件 eg: Name LIKE '%A%' </param>
+            <param name="whereParamValue">字符串WHERE条件中参数化的值</param>
+            <param name="trans"></param>
+            <returns></returns>
         </member>
         <member name="M:DapperPlus.Controllers.SQLServerController.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
             <summary>
@@ -338,6 +445,22 @@
             <param name="funcSort">排序 eg: d=>d.CreateTime </param>
             <param name="isAsc">升序/降序 默认升序 eg: true </param>
             <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:DapperPlus.Controllers.SQLServerController.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
+            <summary>
+            分页获取实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="whereParamName">字符串WHERE条件</param>
+            <param name="whereParamValue">字符串WHERE条件中参数化的值</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime</param>
+            <param name="isAsc">升序/降序 默认升序 eg: true</param>
+            <param name="trans"></param>
+            <returns></returns>
         </member>
         <member name="M:DapperPlus.Controllers.SQLServerController.GetSqlList``1(System.Data.IDbConnection,System.String,System.String,System.String,System.Object,System.String,System.Nullable{System.Int32},System.Data.IDbTransaction)">
             <summary>
@@ -426,11 +549,33 @@
              <param name="param">WHERE条件 eg: new { Name="张三" }</param>
              <returns>T</returns>
         </member>
+        <member name="M:Dapper.Extensions.GetModel``1(System.Data.IDbConnection,System.String,System.Object,System.Data.IDbTransaction)">
+            <summary>
+            获取一个实体
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="whereParamName">字符串WHERE条件</param>
+            <param name="whereParamValue">字符串WHERE条件中参数的值</param>
+            <param name="trans"></param>
+            <returns></returns>
+        </member>
         <member name="M:Dapper.Extensions.GetList``1(System.Data.IDbConnection,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
             <summary>
             获取实体集合
             </summary>
             <param name="param">WHERE条件 eg: new { Name="张三" }</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime </param>
+            <param name="isAsc">升序/降序 默认升序 eg: true </param>
+            <param name="top">top 条数</param>
+            <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:Dapper.Extensions.GetList``1(System.Data.IDbConnection,System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Nullable{System.Int32},System.Data.IDbTransaction)">
+            <summary>
+            获取实体集合
+            </summary>
+            <param name="whereParamName">字符串WHERE条件</param>
+            <param name="whereParamValue">字符串WHERE条件中参数的值</param>
             <param name="funcSort">排序 eg: d=>d.CreateTime </param>
             <param name="isAsc">升序/降序 默认升序 eg: true </param>
             <param name="top">top 条数</param>
@@ -459,6 +604,22 @@
             <param name="funcSort">排序 eg: d=>d.CreateTime </param>
             <param name="isAsc">升序/降序 默认升序 eg: true </param>
             <returns>IEnumerable T </returns>
+        </member>
+        <member name="M:Dapper.Extensions.GetPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.Object,System.Linq.Expressions.Expression{System.Func{``0,System.Object}},System.Boolean,System.Data.IDbTransaction)">
+            <summary>
+            分页获取实体集合
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="conn"></param>
+            <param name="pageNumber">第几页 从1开始</param>
+            <param name="pageSize">每页显示数</param>
+            <param name="totalCounts">总条数</param>
+            <param name="whereParamName">字符串WHERE条件</param>
+            <param name="whereParamValue">字符串WHERE条件中参数的值</param>
+            <param name="funcSort">排序 eg: d=>d.CreateTime</param>
+            <param name="isAsc">升序/降序 默认升序 eg: true</param>
+            <param name="trans"></param>
+            <returns></returns>
         </member>
         <member name="M:Dapper.Extensions.GetSqlPage``1(System.Data.IDbConnection,System.Int32,System.Int32,System.Int32@,System.String,System.String,System.String,System.Object,System.String,System.Data.IDbTransaction)">
             <summary>

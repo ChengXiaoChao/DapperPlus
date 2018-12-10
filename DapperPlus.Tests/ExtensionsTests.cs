@@ -163,7 +163,7 @@ namespace Dapper.Tests
         [TestMethod()]
         public void GetModelTest()
         {
-            var model = MySqlConn.GetModel<OrderHead>();
+            var model = MySqlConn.GetModel<OrderHead>(null);
             Assert.IsTrue(model != null);
         }
 
@@ -171,7 +171,7 @@ namespace Dapper.Tests
         public void GetListTest()
         {
             //var list = MySqlConn.GetList<WXMP_Config>(new { WXMPType = "服务号", IsDelete = 1 }, d => d.Id, false).ToList();
-            var list = MySqlConn.GetList<OrderHead>();
+            var list = MySqlConn.GetList<OrderHead>(null);
             var dt = list.ToDataTable();
             Assert.IsTrue(list.Count() > 0);
         }

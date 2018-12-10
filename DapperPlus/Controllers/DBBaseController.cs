@@ -191,6 +191,16 @@ namespace DapperPlus.Controllers
         /// <returns>T</returns>
         public abstract T GetModel<T>(IDbConnection conn, object param = null, IDbTransaction trans = null) where T : class;
         /// <summary>
+        /// 获取一个实体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="whereParamName"></param>
+        /// <param name="whereParamValue"></param>
+        /// <param name="trans"></param>
+        /// <returns></returns>
+        public abstract T GetModel<T>(IDbConnection conn, string whereParamName = null, object whereParamValue = null, IDbTransaction trans = null) where T : class;
+        /// <summary>
         /// 获取实体集合
         /// </summary>
         /// <param name="param">WHERE条件 eg: new { Name="张三" }</param>
@@ -199,6 +209,19 @@ namespace DapperPlus.Controllers
         /// <param name="top">top 条数</param>
         /// <returns>IEnumerable T </returns>
         public abstract IEnumerable<T> GetList<T>(IDbConnection conn, object param = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, int? top = null, IDbTransaction trans = null);
+        /// <summary>
+        /// 获取实体集合
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="whereParamName"></param>
+        /// <param name="whereParamValue"></param>
+        /// <param name="funcSort"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="top"></param>
+        /// <param name="trans"></param>
+        /// <returns></returns>
+        public abstract IEnumerable<T> GetList<T>(IDbConnection conn, string whereParamName = null, object whereParamValue = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, int? top = null, IDbTransaction trans = null);
         /// <summary>
         /// 获取数据 支持联表查询
         /// </summary>
@@ -221,6 +244,21 @@ namespace DapperPlus.Controllers
         /// <param name="isAsc">升序/降序 默认升序 eg: true </param>
         /// <returns>IEnumerable T </returns>
         public abstract IEnumerable<T> GetPage<T>(IDbConnection conn, int pageNumber, int pageSize, out int totalCounts, object param = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, IDbTransaction trans = null);
+        /// <summary>
+        /// 分页获取数据
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="totalCounts"></param>
+        /// <param name="whereParamName"></param>
+        /// <param name="whereParamValue"></param>
+        /// <param name="funcSort"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="trans"></param>
+        /// <returns></returns>
+        public abstract IEnumerable<T> GetPage<T>(IDbConnection conn, int pageNumber, int pageSize, out int totalCounts, string whereParamName = null, object whereParamValue = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, IDbTransaction trans = null);
         /// <summary>
         /// 分页获取数据 支持联表分页查询
         /// </summary>
@@ -376,6 +414,16 @@ namespace DapperPlus.Controllers
         {
             var type = t.GetType().GetInterface("IEnumerable");
             return type != null;
+        }
+        public static string GetWhere(object param)
+        {
+            var sb = new StringBuilder();
+            foreach (PropertyInfo item in param.GetType().GetProperties())
+            {
+                sb.Append($"{item.Name}=@{item.Name} AND ");
+            }
+            sb = sb.Remove(sb.Length - 4, 4);//去掉最后AND
+            return sb.ToString();
         }
     }
 }

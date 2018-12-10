@@ -37,7 +37,24 @@ namespace DapperPlus.Controllers
         public override IEnumerable<T> GetList<T>(IDbConnection conn, object param = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, int? top = null, IDbTransaction trans = null)
         {
             string tableName = null, sqlWhere = null;
-            return GetData(conn, out tableName, out sqlWhere, param, funcSort, isAsc, pageSize: top, trans: trans);
+            return GetData(conn, out tableName, out sqlWhere, param, null, null, funcSort, isAsc, pageSize: top, trans: trans);
+        }
+        /// <summary>
+        /// 获取实体集合
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="whereParamName">字符串WHERE条件</param>
+        /// <param name="whereParamValue">字符串WHERE条件中的参数值</param>
+        /// <param name="funcSort">排序 eg: d=>d.CreateTime</param>
+        /// <param name="isAsc">升序/降序 默认升序 eg: true </param>
+        /// <param name="top">top 条数</param>
+        /// <param name="trans"></param>
+        /// <returns></returns>
+        public override IEnumerable<T> GetList<T>(IDbConnection conn, string whereParamName = null, object whereParamValue = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, int? top = null, IDbTransaction trans = null)
+        {
+            string tableName = null, sqlWhere = null;
+            return GetData(conn, out tableName, out sqlWhere, null, whereParamName, whereParamValue, funcSort, isAsc, pageSize: top, trans: trans);
         }
         /// <summary>
         ///获取一个实体 
@@ -47,6 +64,19 @@ namespace DapperPlus.Controllers
         public override T GetModel<T>(IDbConnection conn, object param = null, IDbTransaction trans = null)
         {
             return GetList<T>(conn, param, trans: trans).FirstOrDefault();
+        }
+        /// <summary>
+        /// 获取一个实体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="whereParamName">字符串WHERE条件</param>
+        /// <param name="whereParamValue">字符串WHERE条件中的参数值</param>
+        /// <param name="trans"></param>
+        /// <returns></returns>
+        public override T GetModel<T>(IDbConnection conn, string whereParamName = null, object whereParamValue = null, IDbTransaction trans = null)
+        {
+            return GetList<T>(conn, whereParamName, whereParamValue, trans: trans).FirstOrDefault();
         }
         /// <summary>
         /// 分页获取实体集合
@@ -63,13 +93,39 @@ namespace DapperPlus.Controllers
             //SELECT COUNT(*) FROM Table
             //SELECT * FROM Table WHERE 1=1 ORDER BY Field DESC LIMIT 0,10
             string tableName = null, sqlWhere = null;
-            var list = GetData<T>(conn, out tableName, out sqlWhere, param, funcSort, isAsc, pageNumber, pageSize, trans);
+            var list = GetData(conn, out tableName, out sqlWhere, param, null, null, funcSort, isAsc, pageNumber, pageSize, trans);
             var sbSqlTotalCount = new StringBuilder($"SELECT COUNT(*) FROM {tableName} ");
             if (!string.IsNullOrEmpty(sqlWhere))
             {
                 sbSqlTotalCount.Append(sqlWhere);
             }
             totalCounts = conn.ExecuteScalar<int>(sbSqlTotalCount.ToString(), param, trans);
+            return list;
+        }
+        /// <summary>
+        /// 分页获取实体集合
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="pageNumber">第几页 从1开始</param>
+        /// <param name="pageSize">每页显示数</param>
+        /// <param name="totalCounts">总条数</param>
+        /// <param name="whereParamName">字符串WHERE条件</param>
+        /// <param name="whereParamValue">字符串WHERE条件中的参数值</param>
+        /// <param name="funcSort"></param>
+        /// <param name="isAsc"></param>
+        /// <param name="trans"></param>
+        /// <returns></returns>
+        public override IEnumerable<T> GetPage<T>(IDbConnection conn, int pageNumber, int pageSize, out int totalCounts, string whereParamName = null, object whereParamValue = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, IDbTransaction trans = null)
+        {
+            string tableName = null, sqlWhere = null;
+            var list = GetData(conn, out tableName, out sqlWhere, null, whereParamName, whereParamValue, funcSort, isAsc, pageNumber, pageSize, trans);
+            var sbSqlTotalCount = new StringBuilder($"SELECT COUNT(*) FROM {tableName} ");
+            if (!string.IsNullOrEmpty(sqlWhere))
+            {
+                sbSqlTotalCount.Append(sqlWhere);
+            }
+            totalCounts = conn.ExecuteScalar<int>(sbSqlTotalCount.ToString(), whereParamValue, trans);
             return list;
         }
         /// <summary>
@@ -122,24 +178,27 @@ namespace DapperPlus.Controllers
         {
             throw new NotImplementedException();
         }
-        private IEnumerable<T> GetData<T>(IDbConnection conn, out string tableName, out string sqlWhere, object param = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, int? pageNumber = null, int? pageSize = null, IDbTransaction trans = null)
+        private IEnumerable<T> GetData<T>(IDbConnection conn, out string tableName, out string sqlWhere, object param = null, string whereParamName = null, object whereParamValue = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, int? pageNumber = null, int? pageSize = null, IDbTransaction trans = null)
         {
             //SELECT * FROM Table WHERE 1=1 ORDER BY Field DESC LIMIT 0,10
             var type = typeof(T);
             tableName = GetTableName(type);
             var sbSql = new StringBuilder($"SELECT * FROM {tableName} ");
+            object paramValue = null;
             var sbWhere = new StringBuilder();
             if (param != null)//追加条件
             {
-                sbSql.Append("WHERE ");
-                sbWhere.Append("WHERE ");
-                foreach (PropertyInfo item in param.GetType().GetProperties())
-                {
-                    sbSql.Append($"{item.Name}=@{item.Name} AND ");
-                    sbWhere.Append($"{item.Name}=@{item.Name} AND ");
-                }
-                sbSql = sbSql.Remove(sbSql.Length - 4, 4);//去掉最后AND
-                sbWhere = sbWhere.Remove(sbWhere.Length - 4, 4);//去掉最后AND
+                var where = $"WHERE {GetWhere(param)} ";
+                sbSql.Append(where);
+                sbWhere.Append(where);
+                paramValue = param;
+            }
+            else if (!string.IsNullOrEmpty(whereParamName))
+            {
+                var where = $"WHERE {whereParamName} ";
+                sbSql.Append(where);
+                sbWhere.Append(where);
+                paramValue = whereParamValue;
             }
             sqlWhere = sbWhere.ToString();
             if (funcSort != null)//追加排序
@@ -159,7 +218,7 @@ namespace DapperPlus.Controllers
             {
                 sbSql.Append($"LIMIT {pageSize.Value}");
             }
-            return conn.Query<T>(sbSql.ToString(), param, trans);
+            return conn.Query<T>(sbSql.ToString(), paramValue, trans);
         }
         private IEnumerable<T> GetSqlData<T>(IDbConnection conn, string fields = "*", string tableName = null, string whereParamName = null, object whereParamValue = null, string sort = null, int? pageNumber = null, int? pageSize = null, IDbTransaction trans = null)
         {

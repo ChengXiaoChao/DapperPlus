@@ -91,6 +91,20 @@ namespace Dapper
             return controller.GetModel<T>(conn, param, trans);
         }
         /// <summary>
+        /// 获取一个实体
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="whereParamName">字符串WHERE条件</param>
+        /// <param name="whereParamValue">字符串WHERE条件中参数的值</param>
+        /// <param name="trans"></param>
+        /// <returns></returns>
+        public static T GetModel<T>(this IDbConnection conn, string whereParamName = null, object whereParamValue = null, IDbTransaction trans = null) where T : class
+        {
+            var controller = DBFactory.Create(conn);
+            return controller.GetModel<T>(conn, whereParamName, whereParamValue, trans);
+        }
+        /// <summary>
         /// 获取实体集合
         /// </summary>
         /// <param name="param">WHERE条件 eg: new { Name="张三" }</param>
@@ -102,6 +116,20 @@ namespace Dapper
         {
             var controller = DBFactory.Create(conn);
             return controller.GetList(conn, param, funcSort, isAsc, top, trans);
+        }
+        /// <summary>
+        /// 获取实体集合
+        /// </summary>
+        /// <param name="whereParamName">字符串WHERE条件</param>
+        /// <param name="whereParamValue">字符串WHERE条件中参数的值</param>
+        /// <param name="funcSort">排序 eg: d=>d.CreateTime </param>
+        /// <param name="isAsc">升序/降序 默认升序 eg: true </param>
+        /// <param name="top">top 条数</param>
+        /// <returns>IEnumerable T </returns>
+        public static IEnumerable<T> GetList<T>(this IDbConnection conn, string whereParamName = null, object whereParamValue = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, int? top = null, IDbTransaction trans = null) where T : class
+        {
+            var controller = DBFactory.Create(conn);
+            return controller.GetList(conn, whereParamName, whereParamValue, funcSort, isAsc, top, trans);
         }
         /// <summary>
         /// 获取数据 支持联表查询
@@ -132,6 +160,25 @@ namespace Dapper
         {
             var controller = DBFactory.Create(conn);
             return controller.GetPage(conn, pageNumber, pageSize, out totalCounts, param, funcSort, isAsc, trans);
+        }
+        /// <summary>
+        /// 分页获取实体集合
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="conn"></param>
+        /// <param name="pageNumber">第几页 从1开始</param>
+        /// <param name="pageSize">每页显示数</param>
+        /// <param name="totalCounts">总条数</param>
+        /// <param name="whereParamName">字符串WHERE条件</param>
+        /// <param name="whereParamValue">字符串WHERE条件中参数的值</param>
+        /// <param name="funcSort">排序 eg: d=>d.CreateTime</param>
+        /// <param name="isAsc">升序/降序 默认升序 eg: true</param>
+        /// <param name="trans"></param>
+        /// <returns></returns>
+        public static IEnumerable<T> GetPage<T>(this IDbConnection conn, int pageNumber, int pageSize, out int totalCounts, string whereParamName = null, object whereParamValue = null, Expression<Func<T, object>> funcSort = null, bool isAsc = true, IDbTransaction trans = null)
+        {
+            var controller = DBFactory.Create(conn);
+            return controller.GetPage(conn, pageNumber, pageSize, out totalCounts, whereParamName, whereParamValue, funcSort, isAsc, trans);
         }
         /// <summary>
         /// 分页获取数据 支持联表分页查询
