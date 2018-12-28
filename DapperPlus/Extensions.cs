@@ -195,7 +195,7 @@ namespace Dapper
         public static IEnumerable<T> GetSqlPage<T>(this IDbConnection conn, int pageNumber, int pageSize, out int totalCounts, string fields = "*", string tableName = null, string whereParamName = null, object whereParamValue = null, string sort = null, IDbTransaction trans = null)
         {
             var controller = DBFactory.Create(conn);
-            return controller.GetSqlPage<T>(conn, pageNumber, pageSize, out totalCounts, fields = "*", tableName, whereParamName, whereParamValue, sort, trans);
+            return controller.GetSqlPage<T>(conn, pageNumber, pageSize, out totalCounts, fields, tableName, whereParamName, whereParamValue, sort, trans);
         }
         /// <summary>
         /// 根据SQL查询数据
